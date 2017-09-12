@@ -3,6 +3,7 @@ package com.hencoder.hencoderpracticedraw7.practice.practice03;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
 import android.content.Context;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.view.View;
@@ -49,10 +50,15 @@ public class Practice03OfObjectLayout extends RelativeLayout {
 
     private class PointFEvaluator implements TypeEvaluator<PointF> {
 
+        PointF pointF = new PointF();
+
         // 重写 evaluate() 方法，让 PointF 可以作为属性来做动画
         @Override
         public PointF evaluate(float fraction, PointF startValue, PointF endValue) {
-            return startValue;
+            pointF.x = startValue.x+fraction*(endValue.x-startValue.x);
+            pointF.y = startValue.y+fraction*(endValue.y-startValue.y);
+
+            return pointF;
         }
     }
 }
